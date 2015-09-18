@@ -3,8 +3,16 @@
     <head>
         <meta charset="utf-8">
         <title>Writing Counter Online - A Time / Word counter for TOEFL / GRE writing</title>
-        <link rel="stylesheet" href="/css/master.css" media="screen" title="no title" charset="utf-8">
-        <script src="/js/master.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="css/master.css" media="screen" title="no title" charset="utf-8">
+        <script src="js/master.js" charset="utf-8"></script>
+        <script src="js/jquery-2.1.4.min.js" charset="utf-8"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $("#inputbox").on('input propertychange paste', function() {
+                wordCounterUpdate();
+            })
+        });
+        </script>
     </head>
     <body>
         <h1>Writing Counter Online</h1>
@@ -13,7 +21,7 @@
             <span id='wordctr'>0</span>
         </div>
         <div class="textbox">
-            <textarea name="inputbox" rows="60" cols="40"></textarea>
+            <textarea id="inputbox" rows="40" cols="160"></textarea>
 
         </div>
 
