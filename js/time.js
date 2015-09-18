@@ -1,5 +1,6 @@
-var default_minute = 30, default_second = 0;
-var m = default_minute, s = default_second; // minute and second
+var DEFAULT_MINUTE = 30
+var m = DEFAULT_MINUTE; // minutes left
+var s = 0; // seconds left
 var onPause = 1;
 var t; // timer
 
@@ -9,6 +10,8 @@ $(document).ready(function(){
 
 function toggle() {
     if (onPause) {
+        if (document.getElementById("timebtn").innerHTML == "Start")
+            reset();
         onPause = 0;
         document.getElementById("timebtn").innerHTML = "Pause";
         countDown();
@@ -21,7 +24,9 @@ function toggle() {
 }
 
 function reset() {
-    m = 30;
+    cusMin = document.getElementById("xxxxx").value;
+    if (cusMin) m = cusMin;
+    else m = 30;
     s = 0;
     onPause = 1;
     document.getElementById("timebtn").innerHTML = "Start";
