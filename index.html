@@ -4,21 +4,21 @@
         <meta charset="utf-8">
         <title>Writing Counter Online - A Time / Word counter for TOEFL / GRE writing</title>
         <link rel="stylesheet" href="css/master.css" media="screen" title="no title" charset="utf-8">
-        <script src="js/master.js" charset="utf-8"></script>
+        <!-- jquery should be included BEFORE other js files! -->
         <script src="js/jquery-2.1.4.min.js" charset="utf-8"></script>
-        <script type="text/javascript">
-        $(document).ready(function(){
-            $("#inputbox").on('input propertychange paste', function() {
-                wordCounterUpdate();
-            })
-        });
-        </script>
+        <script src="js/word.js" charset="utf-8"></script>
+        <script src="js/time.js" charset="utf-8"></script>
     </head>
     <body>
         <h1>Writing Counter Online</h1>
         <div class="stat">
             <span>Words: </span>
             <span id='wordctr'>0</span>
+            <br>
+            <span>Time left:</span>
+            <span id="time">0</span>
+            <button type="button" id="timebtn" onclick="toggle()">Start</button>
+            <button type="button" name="resetbtn" onclick="reset()">Reset</button>
         </div>
         <div class="textbox">
             <textarea id="inputbox" rows="40" cols="160"></textarea>
