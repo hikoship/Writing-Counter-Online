@@ -3,3 +3,8 @@ textarea {
     font-family: inherit;
     font-size: inherit;
 }
+
+#inputbox {
+    overflow: auto;
+    height: 500px;
+}
