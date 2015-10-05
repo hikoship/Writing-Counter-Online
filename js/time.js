@@ -31,6 +31,9 @@ function reset() {
     onPause = 1;
     document.getElementById("timebtn").innerHTML = "Start";
     document.getElementById("time").innerHTML = m + ":" + s;
+    if (m < 10) document.getElementById("time").innerHTML =
+        '0' + document.getElementById("time").innerHTML;
+    if (s < 10) document.getElementById("time").innerHTML += '0';
     pause();
 }
 
@@ -44,6 +47,9 @@ function countDown() {
             m--;
         }
         document.getElementById("time").innerHTML = m + ":" + s;
+        if (m < 10) document.getElementById("time").innerHTML =
+            '0' + document.getElementById("time").innerHTML;
+        if (s < 10) document.getElementById("time").innerHTML += '0';
         t = setTimeout("countDown()", 1000);
     }
 
