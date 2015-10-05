@@ -1,8 +1,7 @@
-var DEFAULT_MINUTE = 30
-var m = DEFAULT_MINUTE; // minutes left
-var s = 0; // seconds left
 var onPause = 1;
-var t; // timer
+var interval, terminal;
+var date = new Date();
+var i;
 
 $(document).ready(function(){
     reset();
@@ -13,6 +12,8 @@ function toggle() {
         if (document.getElementById("timebtn").innerHTML == "Start")
             reset();
         onPause = 0;
+        date = new Date();
+        terminal = interval + Math.floor(date.getTime() / 1000);
         document.getElementById("timebtn").innerHTML = "Pause";
         countDown();
     }
@@ -24,42 +25,39 @@ function toggle() {
 }
 
 function reset() {
-    cusMin = document.getElementById("xxxxx").value;
-    if (cusMin) m = cusMin;
-    else m = 30;
-    s = 0;
+    cusMin = parseInt(document.getElementById("xxxxx").value);
+    if (cusMin) interval = cusMin * 60;
+    else interval = 30 * 60;
     onPause = 1;
     document.getElementById("timebtn").innerHTML = "Start";
-    document.getElementById("time").innerHTML = m + ":" + s;
-    if (m < 10) document.getElementById("time").innerHTML =
-        '0' + document.getElementById("time").innerHTML;
-    if (s < 10) document.getElementById("time").innerHTML += '0';
+    display(interval);
+    date = new Date();
+    terminal = interval + Math.floor(date.getTime() / 1000);
     pause();
 }
 
 function countDown() {
-    if (s > 0 || m > 0) {
-        if (s > 0) {
-            s--;
+    i = setInterval(function () {
+        date = new Date();
+        if (terminal >= Math.floor(date.getTime() / 1000)) {
+            interval = terminal - Math.floor(date.getTime() / 1000);
+            display(interval);
         }
-        else {
-            s = 59;
-            m--;
-        }
-        document.getElementById("time").innerHTML = m + ":" + s;
-        if (m < 10) document.getElementById("time").innerHTML =
-            '0' + document.getElementById("time").innerHTML;
-        if (s < 10) document.getElementById("time").innerHTML += '0';
-        t = setTimeout("countDown()", 1000);
-    }
 
-    // timeout
-    else {
-        toggle();
-        // TODO continue counting
-    }
+        else toggle();
+
+    }, 1000);
+
 }
 
 function pause() {
-    clearTimeout(t);
+    clearInterval(i);
+}
+
+function display(t) {
+    var m = Math.floor(t / 60);
+    var s = t % 60;
+    if (m < 10) m = '0' + m;
+    if (s < 10) s = '0' + s;
+    document.getElementById("time").innerHTML = m + ":" + s;
 }
