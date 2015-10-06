@@ -18,13 +18,22 @@
           ga('create', 'UA-55878990-7', 'auto');
           ga('send', 'pageview');
 
+        function checkOption() {
+            if (document.getElementById("spellcheck").checked)
+                document.getElementById("inputbox").spellcheck = true;
+            else document.getElementById("inputbox").spellcheck = false;
+            if (document.getElementById("enbwordctr").checked)
+                document.getElementById("wordctr").style.display = "";
+            else document.getElementById("wordctr").style.display = "none";
+        }
+
         </script>
 
     </head>
     <body>
-        <div class="container" align="center">
+        <div class="container">
 
-            <h1>Writing Counter Online</h1>
+            <h1 align="center">Writing Counter Online</h1>
 
             <div class="word" align="left">
                 <span>Words: </span>
@@ -40,9 +49,13 @@
                 <span>Custom time limit (minutes): </span>
                 <textarea id="xxxxx" rows="1" cols="3"></textarea>
             </div>
+            <div class="options">
+                <input type="checkbox" id="spellcheck" onchange="checkOption()">enable spell check
+                <input type="checkbox" id="enbwordctr" onchange="checkOption()" checked="true">enable word counter
+            </div>
 
             <div class="textbox">
-                <textarea id="inputbox"></textarea>
+                <textarea id="inputbox" spellcheck="false"></textarea>
             </div>
 
             <a href="/about">About</a>
